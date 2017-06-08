@@ -21,7 +21,9 @@ var handlePOST = function(request,cb) {
   });
 
   request.on('end', function() {
-    messages.push(JSON.parse(requestBody));
+    var msg = JSON.parse(requestBody);
+    msg.createdAt = new Date();
+    messages.unshift(msg);
     cb(201,messages);
   });
 };
