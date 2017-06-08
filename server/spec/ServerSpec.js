@@ -184,4 +184,17 @@ describe('Node Server Request Listener Function', function() {
       });
   });
 
+  it('Should 400 when passed an empty object', function() {
+    var stubMsg = {};
+    var req = new stubs.request('/classes/messages', 'POST', stubMsg);
+    var res = new stubs.response();
+
+    handler.requestHandler(req, res);
+
+    expect(res._responseCode).to.equal(400);
+
+  });
+
+
+
 });

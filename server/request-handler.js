@@ -22,9 +22,14 @@ var handlePOST = function(request,cb) {
 
   request.on('end', function() {
     var msg = JSON.parse(requestBody);
-    msg.createdAt = new Date();
-    messages.unshift(msg);
-    cb(201,messages);
+    if (Object.keys(msg).length) {
+      msg.createdAt = new Date();
+      messages.unshift(msg);
+      cb(201, messages);
+    } else {
+      cb(400, {response: 'Cant post empty data'});
+    }
+
   });
 };
 
